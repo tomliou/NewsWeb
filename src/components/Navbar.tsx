@@ -14,10 +14,11 @@ export default function Navbar() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="text-xl font-bold">
-            新聞聚合
+            湯姆的測試
           </Link>
 
           <div className="flex items-center space-x-4">
+            
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg"
@@ -28,6 +29,10 @@ export default function Navbar() {
                 <MoonIcon className="h-5 w-5" />
               )}
             </button>
+
+            <Link href="/bookmarks" className="px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg">
+              我的收藏
+            </Link>
 
             {session ? (
               <button
