@@ -72,3 +72,5 @@ npm run dev
 ## 許可證
 
 MIT 
+
+#campaign的物流設定
