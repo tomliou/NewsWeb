@@ -1,6 +1,6 @@
-# 新聞聚合平台
+# NewsWeb
 
-這是湯六用 vide coding 做的一個現代化的新聞聚合網站，匯集各大平台熱門新聞網站(其實也沒這麼厲害拉)
+新聞聚合平台 — 湯六用 vibe coding 做的一個現代化新聞聚合網站，匯集各大平台熱門新聞（其實也沒這麼厲害拉）
 人生第一次做這個也是小小害羞
 
 ## 功能特點
@@ -25,8 +25,8 @@
 1. 克隆項目：
 
 ```bash
-git clone [repository-url]
-cd news-aggregator
+git clone https://github.com/tomliou/NewsWeb.git
+cd NewsWeb
 ```
 
 2. 安裝依賴：
@@ -64,7 +64,7 @@ npm run dev
 
 本項目可以輕鬆部署到 Vercel：
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=[repository-url])
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/tomliou/NewsWeb)
 
 ## 貢獻
 
