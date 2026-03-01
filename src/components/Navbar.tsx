@@ -10,10 +10,10 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme()
 
   return (
-    <nav className="border-b">
+    <nav className="border-b bg-blue-600 dark:bg-blue-700 text-white">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold">
+          <Link href="/" className="text-xl font-bold text-white hover:text-blue-100">
             湯姆的測試
           </Link>
 
@@ -21,7 +21,7 @@ export default function Navbar() {
             
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg"
+              className="p-2 hover:bg-blue-500 dark:hover:bg-blue-600 rounded-lg text-white"
             >
               {theme === 'dark' ? (
                 <SunIcon className="h-5 w-5" />
