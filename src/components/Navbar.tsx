@@ -14,7 +14,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="text-xl font-bold text-white hover:text-blue-100">
-            湯姆的測試
+            湯姆的新聞網站測試
           </Link>
 
           <div className="flex items-center space-x-4">
