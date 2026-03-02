@@ -8,14 +8,14 @@ export default function SignIn() {
       <div className="w-full max-w-md space-y-8 p-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold">歡迎登入</h2>
-          <p className="mt-2 text-gray-600 dark:text-gray-400">
+          <p className="mt-2 text-gray-600">
             使用以下方式繼續
           </p>
         </div>
 
         <button
           onClick={() => signIn('google', { callbackUrl: '/' })}
-          className="flex w-full items-center justify-center gap-3 rounded-lg border p-4 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+          className="flex w-full items-center justify-center gap-3 rounded-lg border p-4 text-gray-700 hover:bg-gray-50"
         >
           <svg
             className="h-5 w-5"

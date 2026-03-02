@@ -116,7 +116,7 @@ export default function NewsCard({
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+          className="block p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
         >
           <div className="relative mb-4">
             <img
@@ -129,10 +129,10 @@ export default function NewsCard({
             />
           </div>
           <h3 className="text-lg font-semibold mb-2 line-clamp-2">{title}</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+          <p className="text-gray-600 mb-4 line-clamp-3">
             {description}
           </p>
-          <div className="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400">
+          <div className="flex justify-between items-center text-sm text-gray-500">
             <span>{source}</span>
             <span className="flex items-center gap-2">
               {date}

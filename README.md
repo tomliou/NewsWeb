@@ -8,7 +8,6 @@
 - **個人化問候**：每日精選標題含隨機稱謂與當日日期（例：`{userName} 早安！以下是 YYYY-MM-DD 的精選新聞`）
 - **分類 Tab**：依 API 的 `source` 篩選 — 科技、財經、社會、娛樂
 - **響應式設計**：支援桌面與行動裝置
-- **暗黑模式**：使用 next-themes 切換亮/暗主題
 - **用戶登入**：NextAuth.js（支援 GitHub、Google OAuth）
 - **收藏功能**：可收藏新聞（書籤 API）
 
@@ -18,7 +17,7 @@
 - **語言**：TypeScript
 - **樣式**：Tailwind CSS
 - **認證**：NextAuth.js
-- **UI**：Headless UI（Tab）、Heroicons、next-themes
+- **UI**：Headless UI（Tab）、Heroicons
 
 ## 資料來源
 
