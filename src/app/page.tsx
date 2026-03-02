@@ -6,11 +6,22 @@ import NewsCard from '@/components/NewsCard'
 
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'https://active-trust-e46c30f868.strapiapp.com'
 
+const USER_NAMES = ['豬大哥', '劉獻隆是大帥哥'] as const
+
+function getRandomUserName() {
+  return USER_NAMES[Math.floor(Math.random() * USER_NAMES.length)]
+}
+
+function getTodayDateString() {
+  const d = new Date()
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+}
+
 const categories = [
   { id: 'tech', name: '科技', source: 'yahoo 科技新聞' },
   { id: 'finance', name: '財經', source: '東森新聞雲 財經新聞' },
   { id: 'social', name: '社會', source: 'Google 社會新聞' },
-  { id: 'discussion', name: '討論', source: 'Dcard 討論新聞' },
+  { id: 'entertainment', name: '娛樂', source: '娛樂' },
 ]
 
 interface NewsItem {
@@ -23,7 +34,7 @@ interface NewsItem {
   image: string
 }
 
-/** 將 Strapi 回傳的 article 轉成 NewsCard 格式 */
+/** 將 Strapi API 回傳的 article 轉成 NewsCard 格式（支援扁平結構） */
 function toNewsItem(raw: Record<string, unknown>): NewsItem {
   const attrs = (raw.attributes as Record<string, unknown>) || raw
   const image = attrs.image as Record<string, unknown> | undefined
@@ -42,15 +53,17 @@ function toNewsItem(raw: Record<string, unknown>): NewsItem {
 }
 
 export default function Home() {
+  const [userName] = useState(() => getRandomUserName())
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [articles, setArticles] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const dateStr = getTodayDateString()
 
   useEffect(() => {
     setLoading(true)
     setError(null)
-    fetch(`${STRAPI_URL}/api/articles?populate=image`)
+    fetch(`${STRAPI_URL}/api/articles`)
       .then(async (res) => {
         const json = await res.json().catch(() => ({}))
         if (!res.ok) throw new Error(json.error?.message || `HTTP ${res.status}`)
@@ -66,7 +79,10 @@ export default function Home() {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-4xl font-bold">熱門新聞</h1>
+      <h1 className="text-4xl">
+        <span className="font-bold">{userName}</span>
+        <span className="font-normal"> 早安！以下是 {dateStr} 的精選新聞</span>
+      </h1>
 
       <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
         <Tab.List className="flex space-x-4 border-b">
@@ -87,35 +103,38 @@ export default function Home() {
         </Tab.List>
 
         <Tab.Panels className="mt-4">
-          {categories.map((cat) => (
-            <Tab.Panel
-              key={cat.id}
-              className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-            >
-              {loading && <p className="col-span-full text-gray-500">載入中…</p>}
-              {error && <p className="col-span-full text-red-500">{error}</p>}
-              {!loading && !error && articles.length === 0 && (
-                <p className="col-span-full text-gray-500">
-                  尚無文章，請在 Strapi 後台新增 Article。
-                </p>
-              )}
-              {!loading &&
-                !error &&
-                articles.map((item) => (
-                  <NewsCard
-                    key={item.id}
-                    id={item.id}
-                    title={item.title}
-                    description={item.description}
-                    source={item.source}
-                    date={item.date ? new Date(item.date).toLocaleDateString('zh-TW') : ''}
-                    href={item.href}
-                    image={item.image}
-                    showFooterText={false}
-                  />
-                ))}
-            </Tab.Panel>
-          ))}
+          {categories.map((cat) => {
+            const filtered = articles.filter((item) => item.source === cat.source)
+            return (
+              <Tab.Panel
+                key={cat.id}
+                className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+              >
+                {loading && <p className="col-span-full text-gray-500">載入中…</p>}
+                {error && <p className="col-span-full text-red-500">{error}</p>}
+                {!loading && !error && filtered.length === 0 && (
+                  <p className="col-span-full text-gray-500">
+                    此分類尚無文章。
+                  </p>
+                )}
+                {!loading &&
+                  !error &&
+                  filtered.map((item) => (
+                    <NewsCard
+                      key={item.id}
+                      id={item.id}
+                      title={item.title}
+                      description={item.description}
+                      source={item.source}
+                      date={item.date ? new Date(item.date).toLocaleDateString('zh-TW') : ''}
+                      href={item.href}
+                      image={item.image}
+                      showFooterText={false}
+                    />
+                  ))}
+              </Tab.Panel>
+            )
+          })}
         </Tab.Panels>
       </Tab.Group>
     </div>
