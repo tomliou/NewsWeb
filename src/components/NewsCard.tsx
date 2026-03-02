@@ -122,7 +122,7 @@ export default function NewsCard({
             <img
               src={image || "https://picsum.photos/400/200"}
               alt={title}
-              className="w-full h-40 object-cover rounded-md"
+              className="w-full h-40 object-cover object-top rounded-md"
               onError={(e) => {
                 e.currentTarget.src = "https://picsum.photos/400/200"
               }}
