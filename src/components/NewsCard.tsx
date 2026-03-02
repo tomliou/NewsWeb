@@ -128,14 +128,13 @@ export default function NewsCard({
               }}
             />
           </div>
-          <h3 className="text-lg font-semibold mb-2 line-clamp-2">{title}</h3>
-          <p className="text-gray-600 mb-4 line-clamp-3">
+          <h3 className="text-lg font-semibold mb-2 line-clamp-2 min-h-[3em] leading-snug">{title}</h3>
+          <p className="text-[0.9rem] font-normal text-gray-500 mb-4 line-clamp-3">
             {description}
           </p>
           <div className="flex justify-between items-center text-sm text-gray-500">
-            <span>{source}</span>
+            <span>{date} · {source}</span>
             <span className="flex items-center gap-2">
-              {date}
               <HeartIcon
                 onClick={(e) => {
                   e.stopPropagation();
