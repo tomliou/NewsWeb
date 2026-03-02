@@ -34,7 +34,7 @@ function toNewsItem(raw: Record<string, unknown>): NewsItem {
 }
 
 export async function fetchArticles(): Promise<NewsItem[]> {
-  const res = await fetch(`${STRAPI_URL}/api/articles`, {
+  const res = await fetch(`${STRAPI_URL}/api/articles?populate=image`, {
     next: { revalidate: 60 },
   })
   if (!res.ok) throw new Error(`API ${res.status}`)
