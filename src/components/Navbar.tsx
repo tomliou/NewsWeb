@@ -15,7 +15,7 @@ export default function Navbar() {
           </Link>
 
           <div className="flex items-center space-x-4">
-            <Link href="/bookmarks" className="px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg">
+            <Link href="/bookmarks" className="px-4 py-2 text-sm font-medium text-white border border-white rounded-lg hover:bg-white/10 transition-colors">
               我的收藏
             </Link>
 

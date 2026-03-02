@@ -116,7 +116,7 @@ export default function NewsCard({
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="block p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+          className="block p-6 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow transition-shadow"
         >
           <div className="relative mb-4">
             <img

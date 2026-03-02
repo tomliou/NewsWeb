@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh">
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-gray-100 min-h-screen`}>
         <AuthProvider>
           <Navbar />
           <main className="container mx-auto px-4 py-8">
