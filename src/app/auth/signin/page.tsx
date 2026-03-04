@@ -7,6 +7,7 @@ import { signIn } from 'next-auth/react'
 function SignInContent() {
   const searchParams = useSearchParams()
   const error = searchParams.get('error')
+  const callbackUrl = searchParams.get('callbackUrl') ?? '/?welcome'
 
   return (
     <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center">
@@ -19,12 +20,15 @@ function SignInContent() {
           {error === 'OAuthCallback' && (
             <p className="mt-3 text-sm text-amber-700 bg-amber-50 px-3 py-2 rounded">
               登入回調失敗，請確認 Vercel 已設定 NEXTAUTH_URL 並重新部署。
+              <a href={callbackUrl} className="block mt-2 text-blue-600 hover:underline">
+                先回首頁 →
+              </a>
             </p>
           )}
         </div>
 
         <button
-          onClick={() => signIn('google', { callbackUrl: '/?welcome' })}
+          onClick={() => signIn('google', { callbackUrl })}
           className="flex w-full items-center justify-center gap-3 rounded-lg border p-4 text-gray-700 hover:bg-gray-50"
         >
           <svg
