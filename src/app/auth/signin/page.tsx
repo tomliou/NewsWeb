@@ -1,8 +1,12 @@
 'use client'
 
+import { useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 
 export default function SignIn() {
+  const searchParams = useSearchParams()
+  const error = searchParams.get('error')
+
   return (
     <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center">
       <div className="w-full max-w-md space-y-8 p-8">
@@ -11,6 +15,11 @@ export default function SignIn() {
           <p className="mt-2 text-gray-600">
             使用以下方式繼續
           </p>
+          {error === 'OAuthCallback' && (
+            <p className="mt-3 text-sm text-amber-700 bg-amber-50 px-3 py-2 rounded">
+              登入回調失敗，請確認 Vercel 已設定 NEXTAUTH_URL 並重新部署。
+            </p>
+          )}
         </div>
 
         <button
