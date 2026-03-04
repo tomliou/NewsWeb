@@ -52,18 +52,9 @@ export default function Navbar() {
                 <UserCircleIcon className="h-6 w-6 shrink-0 text-white cursor-pointer" aria-hidden />
               )}
               {session ? (
-                <>
-                  <span className="text-sm font-medium text-white truncate max-w-[120px]">
-                    {session.user?.name ?? '使用者'}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => signOut()}
-                    className="text-sm font-medium text-white/90 hover:text-white underline underline-offset-2 shrink-0"
-                  >
-                    登出
-                  </button>
-                </>
+                <span className="text-sm font-medium text-white truncate max-w-[120px]">
+                  {session.user?.name ?? '使用者'}
+                </span>
               ) : (
                 <span className="text-sm font-medium text-white whitespace-nowrap">請登入</span>
               )}

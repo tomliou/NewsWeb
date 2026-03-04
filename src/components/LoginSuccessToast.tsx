@@ -22,7 +22,7 @@ export default function LoginSuccessToast() {
 
   return (
     <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg text-sm animate-fade-in-out">
-      {session.user.name} 登入成功
+      登入成功
     </div>
   )
 }
