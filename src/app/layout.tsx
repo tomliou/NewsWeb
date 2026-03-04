@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import AuthProvider from '@/components/AuthProvider'
 import Navbar from '@/components/Navbar'
-import WelcomeToast from '@/components/WelcomeToast'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,7 +21,6 @@ export default function RootLayout({
       <body className={`${inter.className} bg-gray-100 min-h-screen`}>
         <AuthProvider>
           <Navbar />
-          <WelcomeToast />
           <main className="container mx-auto px-4 py-8">
             {children}
           </main>

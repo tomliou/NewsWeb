@@ -7,7 +7,7 @@ import { signIn } from 'next-auth/react'
 function SignInContent() {
   const searchParams = useSearchParams()
   const error = searchParams.get('error')
-  const callbackUrl = searchParams.get('callbackUrl') ?? '/?welcome'
+  const callbackUrl = searchParams.get('callbackUrl') ?? '/'
 
   const isFailed = Boolean(error)
 
