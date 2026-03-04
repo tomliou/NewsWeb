@@ -1,9 +1,10 @@
 'use client'
 
+import { Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 
-export default function SignIn() {
+function SignInContent() {
   const searchParams = useSearchParams()
   const error = searchParams.get('error')
 
@@ -41,5 +42,13 @@ export default function SignIn() {
         </button>
       </div>
     </div>
+  )
+}
+
+export default function SignIn() {
+  return (
+    <Suspense fallback={<div className="flex min-h-[calc(100vh-4rem)] items-center justify-center text-gray-500">載入中...</div>}>
+      <SignInContent />
+    </Suspense>
   )
 } 
