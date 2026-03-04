@@ -20,15 +20,27 @@ export default function Navbar() {
             </Link>
 
             {session ? (
-              <button
-                onClick={() => signOut()}
-                className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg"
-              >
-                登出
-              </button>
+              <div className="flex items-center gap-3">
+                {session.user?.image && (
+                  <img
+                    src={session.user.image}
+                    alt={session.user?.name ?? ''}
+                    className="w-8 h-8 rounded-full border-2 border-white object-cover"
+                  />
+                )}
+                <span className="text-sm font-medium text-white/95">
+                  {session.user?.name ?? '使用者'}
+                </span>
+                <button
+                  onClick={() => signOut()}
+                  className="text-sm font-medium text-white/90 hover:text-white underline underline-offset-2"
+                >
+                  登出
+                </button>
+              </div>
             ) : (
               <button
-                onClick={() => signIn('google')}
+                onClick={() => signIn('google', { callbackUrl: '/?welcome' })}
                 className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg"
               >
                 登入

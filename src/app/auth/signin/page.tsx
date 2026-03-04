@@ -14,7 +14,7 @@ export default function SignIn() {
         </div>
 
         <button
-          onClick={() => signIn('google', { callbackUrl: '/' })}
+          onClick={() => signIn('google', { callbackUrl: '/?welcome' })}
           className="flex w-full items-center justify-center gap-3 rounded-lg border p-4 text-gray-700 hover:bg-gray-50"
         >
           <svg
