@@ -11,9 +11,6 @@ const handler = NextAuth({
   pages: {
     signIn: '/auth/signin',
   },
-  events: {
-    error: ({ error }) => console.error('[NextAuth] error', error),
-  },
 })
 
 export { handler as GET, handler as POST } 
