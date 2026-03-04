@@ -1,10 +1,32 @@
 'use client'
 
+import { useState, useRef } from 'react'
 import Link from 'next/link'
 import { useSession, signIn, signOut } from 'next-auth/react'
+import { UserCircleIcon } from '@heroicons/react/24/solid'
+
+const CARD_CLOSE_DELAY_MS = 150
 
 export default function Navbar() {
   const { data: session } = useSession()
+  const [cardOpen, setCardOpen] = useState(false)
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const clearCloseTimer = () => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current)
+      closeTimerRef.current = null
+    }
+  }
+
+  const handleEnter = () => {
+    clearCloseTimer()
+    setCardOpen(true)
+  }
+
+  const handleLeave = () => {
+    closeTimerRef.current = setTimeout(() => setCardOpen(false), CARD_CLOSE_DELAY_MS)
+  }
 
   return (
     <nav className="border-b bg-blue-600 text-white">
@@ -14,37 +36,79 @@ export default function Navbar() {
             湯姆的新聞網站測試
           </Link>
 
-          <div className="flex items-center space-x-4">
-            <Link href="/bookmarks" className="px-4 py-2 text-sm font-medium text-white border border-white rounded-lg hover:bg-white/10 transition-colors">
-              我的收藏
-            </Link>
-
-            {session ? (
-              <div className="flex items-center gap-3">
-                {session.user?.image && (
-                  <img
-                    src={session.user.image}
-                    alt={session.user?.name ?? ''}
-                    className="w-8 h-8 rounded-full border-2 border-white object-cover"
-                  />
-                )}
-                <span className="text-sm font-medium text-white/95">
-                  {session.user?.name ?? '使用者'}
-                </span>
-                <button
-                  onClick={() => signOut()}
-                  className="text-sm font-medium text-white/90 hover:text-white underline underline-offset-2"
-                >
-                  登出
-                </button>
-              </div>
-            ) : (
-              <button
-                onClick={() => signIn('google', { callbackUrl: '/' })}
-                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg"
+          <div
+            className="relative flex items-center"
+            onMouseEnter={handleEnter}
+            onMouseLeave={handleLeave}
+          >
+            <div className="flex items-center gap-2 py-1">
+              {session?.user?.image ? (
+                <img
+                  src={session.user.image}
+                  alt={session.user?.name ?? ''}
+                  className="h-6 w-6 rounded-full border border-white object-cover cursor-pointer"
+                />
+              ) : (
+                <UserCircleIcon className="h-6 w-6 shrink-0 text-white cursor-pointer" aria-hidden />
+              )}
+              {!session && (
+                <span className="text-sm font-medium text-white whitespace-nowrap">請登入</span>
+              )}
+            </div>
+            {cardOpen && (
+              <div
+                className="absolute right-0 top-full z-50 mt-1 w-72 rounded-xl bg-white shadow-xl text-gray-800 overflow-hidden border border-gray-100"
+                onMouseEnter={handleEnter}
+                onMouseLeave={handleLeave}
               >
-                登入
-              </button>
+                {session ? (
+                  <>
+                    <div className="p-4 border-b border-gray-100">
+                      <p className="text-sm font-medium truncate">{session.user?.name ?? '使用者'}</p>
+                      <p className="text-xs text-gray-500 truncate">{session.user?.email}</p>
+                    </div>
+                    <div className="p-2">
+                      <Link
+                        href="/bookmarks"
+                        className="block rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => setCardOpen(false)}
+                      >
+                        我的收藏
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => { signOut(); setCardOpen(false) }}
+                        className="w-full rounded-lg px-3 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        登出
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="p-4">
+                      <p className="text-sm font-medium text-gray-800">登入才能收藏新聞</p>
+                    </div>
+                    <div className="px-4 pb-4 pt-0">
+                      <button
+                        type="button"
+                        onClick={() => signIn('google', { callbackUrl: '/' })}
+                        className="w-full rounded-lg px-4 py-2.5 text-sm font-medium text-white hover:opacity-90"
+                    style={{ backgroundColor: '#ff5353' }}
+                      >
+                        立即登入
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setCardOpen(false)}
+                        className="mt-2 block w-full text-center text-xs text-gray-500 hover:text-gray-700"
+                      >
+                        下次再說
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
             )}
           </div>
         </div>
