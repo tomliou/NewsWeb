@@ -46,21 +46,19 @@ export default function HomeClient({
           style={{ height: 48, minHeight: 48, maxHeight: 48 }}
         >
           <div
-            className="container mx-auto flex border-b px-4"
-            style={{ height: '100%', minHeight: 0 }}
+            className="container mx-auto flex h-full border-b border-gray-300 px-4"
           >
-            <Tab.List className="flex h-full min-h-0 items-center space-x-4">
+            <Tab.List className="relative flex h-full items-end space-x-4">
               {categories.map((cat) => (
                 <Tab
                   key={cat.id}
                   className={({ selected }) =>
-                    `flex shrink-0 items-center px-4 text-sm font-medium leading-none outline-none ring-0 focus:outline-none focus:ring-0 ${
+                    `relative -mb-px flex shrink-0 items-center px-4 pb-3 text-sm font-medium leading-none outline-none ring-0 focus:outline-none focus:ring-0 ${
                       selected
                         ? 'border-b-2 border-blue-500 text-blue-600'
-                        : 'text-gray-600 hover:text-blue-600'
+                        : 'border-b-2 border-transparent text-gray-600 hover:text-blue-600'
                     }`
                   }
-                  style={{ height: 40, minHeight: 40 }}
                 >
                   {cat.name}
                 </Tab>

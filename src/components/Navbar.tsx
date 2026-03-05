@@ -29,7 +29,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 h-16 min-h-16 max-h-16 shrink-0 overflow-hidden border-b bg-blue-600 text-white">
+    <nav className="fixed top-0 left-0 right-0 z-50 h-16 min-h-16 max-h-16 shrink-0 border-b bg-blue-600 text-white">
       <div className="container mx-auto flex h-full min-h-0 items-center px-4">
         <div className="flex min-h-0 flex-1 items-center justify-between">
           <Link href="/" className="text-xl font-bold text-white hover:text-blue-100">
@@ -61,7 +61,7 @@ export default function Navbar() {
             </div>
             {cardOpen && (
               <div
-                className="absolute right-0 top-full z-50 mt-1 w-72 rounded-xl bg-white shadow-xl text-gray-800 overflow-hidden border border-gray-100"
+                className="absolute right-0 top-full z-[100] mt-1 w-72 rounded-xl bg-white shadow-xl text-gray-800 overflow-hidden border border-gray-100"
                 onMouseEnter={handleEnter}
                 onMouseLeave={handleLeave}
               >
