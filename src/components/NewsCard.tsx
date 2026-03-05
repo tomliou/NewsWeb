@@ -43,12 +43,11 @@ export default function NewsCard({
   }, [id]); // 依賴 id
 
   const handleBookmark = () => {
-    console.log('點擊愛心，執行 handleBookmark');
-    // if (!session) {
-    //   // 提示用戶登錄
-    //   alert('請先登錄才能收藏新聞'); // 增加提示
-    //   return
-    // }
+    if (!session) {
+      setToastMessage('先登入才能收藏新聞');
+      setShowToast(true);
+      return;
+    }
 
     const newsData = {
       id,

@@ -38,32 +38,37 @@ export default function HomeClient({
 
   return (
     <div className="space-y-8">
-      <h1 className="text-4xl">
-        <span className="font-bold">{userName}</span>
-        <span className="font-normal"> 早安！以下是 {dateStr} 的精選新聞</span>
-      </h1>
-
-      {error && <p className="text-red-500">{error}</p>}
-
       <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
-        <Tab.List className="flex space-x-4 border-b">
-          {categories.map((cat) => (
-            <Tab
-              key={cat.id}
-              className={({ selected }) =>
-                `py-2 px-4 text-sm font-medium leading-5 ${
-                  selected
-                    ? 'border-b-2 border-blue-500 text-blue-600'
-                    : 'text-gray-600 hover:text-blue-600'
-                }`
-              }
-            >
-              {cat.name}
-            </Tab>
-          ))}
-        </Tab.List>
+        <div className="fixed left-0 right-0 top-16 z-40 bg-gray-100">
+          <div className="container mx-auto border-b px-4">
+            <Tab.List className="flex space-x-4">
+              {categories.map((cat) => (
+                <Tab
+                  key={cat.id}
+                  className={({ selected }) =>
+                    `h-11 py-2 px-4 text-sm font-medium leading-5 outline-none ring-0 focus:outline-none focus:ring-0 ${
+                      selected
+                        ? 'border-b-2 border-blue-500 text-blue-600'
+                        : 'text-gray-600 hover:text-blue-600'
+                    }`
+                  }
+                >
+                  {cat.name}
+                </Tab>
+              ))}
+            </Tab.List>
+          </div>
+        </div>
 
-        <Tab.Panels className="mt-4">
+        {/* 預留固定高度，避免問候語被固定 Tab 遮住（padding 不塌陷） */}
+        <div className="pt-8">
+          <h1 className="text-4xl">
+            <span className="font-bold">{userName}</span>
+            <span className="font-normal"> 早安！以下是 {dateStr} 的精選新聞</span>
+          </h1>
+          {error && <p className="text-red-500">{error}</p>}
+
+          <Tab.Panels className="mt-4">
           {categories.map((cat) => {
             const filtered = initialArticles.filter(
               (item) => item.source === cat.source
@@ -97,7 +102,8 @@ export default function HomeClient({
               </Tab.Panel>
             )
           })}
-        </Tab.Panels>
+          </Tab.Panels>
+        </div>
       </Tab.Group>
     </div>
   )

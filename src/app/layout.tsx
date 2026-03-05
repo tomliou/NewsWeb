@@ -23,7 +23,7 @@ export default function RootLayout({
         <AuthProvider>
           <Navbar />
           <LoginSuccessToast />
-          <main className="container mx-auto px-4 py-8">
+          <main className="container mx-auto px-4 pt-16 pb-8">
             {children}
           </main>
         </AuthProvider>

@@ -29,7 +29,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="border-b bg-blue-600 text-white">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b bg-blue-600 text-white">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="text-xl font-bold text-white hover:text-blue-100">
@@ -41,22 +41,22 @@ export default function Navbar() {
             onMouseEnter={handleEnter}
             onMouseLeave={handleLeave}
           >
-            <div className="flex items-center gap-2 py-1">
+            <div className="group flex items-center gap-2 py-1 cursor-pointer">
               {session?.user?.image ? (
                 <img
                   src={session.user.image}
                   alt={session.user?.name ?? ''}
-                  className="h-6 w-6 rounded-full border border-white object-cover cursor-pointer"
+                  className="h-6 w-6 rounded-full border border-white object-cover transition-opacity group-hover:opacity-50"
                 />
               ) : (
-                <UserCircleIcon className="h-6 w-6 shrink-0 text-white cursor-pointer" aria-hidden />
+                <UserCircleIcon className="h-6 w-6 shrink-0 text-white transition-opacity group-hover:opacity-50" aria-hidden />
               )}
               {session ? (
-                <span className="text-sm font-medium text-white truncate max-w-[120px]">
+                <span className="text-sm font-medium text-white truncate max-w-[120px] transition-opacity group-hover:opacity-50">
                   {session.user?.name ?? '使用者'}
                 </span>
               ) : (
-                <span className="text-sm font-medium text-white whitespace-nowrap">請登入</span>
+                <span className="text-sm font-medium text-white whitespace-nowrap transition-opacity group-hover:opacity-50">請登入</span>
               )}
             </div>
             {cardOpen && (
@@ -90,7 +90,7 @@ export default function Navbar() {
                   </>
                 ) : (
                   <>
-                    <div className="p-4">
+                    <div className="p-4 text-center">
                       <p className="text-sm font-medium text-gray-800">登入才能收藏新聞</p>
                     </div>
                     <div className="px-4 pb-4 pt-0">
@@ -101,13 +101,6 @@ export default function Navbar() {
                     style={{ backgroundColor: '#ff5353' }}
                       >
                         立即登入
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setCardOpen(false)}
-                        className="mt-2 block w-full text-center text-xs text-gray-500 hover:text-gray-700"
-                      >
-                        下次再說
                       </button>
                     </div>
                   </>
