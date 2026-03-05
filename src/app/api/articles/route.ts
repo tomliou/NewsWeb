@@ -4,7 +4,7 @@ const STRAPI_URL = process.env.STRAPI_URL || process.env.NEXT_PUBLIC_STRAPI_URL 
 
 export async function GET() {
   try {
-    const res = await fetch(`${STRAPI_URL}/api/articles?populate=image`, {
+    const res = await fetch(`${STRAPI_URL}/api/articles?populate=image&populate=category`, {
       next: { revalidate: 60 },
     })
     if (!res.ok) throw new Error(`Strapi ${res.status}`)

@@ -29,9 +29,9 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b bg-blue-600 text-white">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
+    <nav className="fixed top-0 left-0 right-0 z-50 h-16 min-h-16 max-h-16 shrink-0 overflow-hidden border-b bg-blue-600 text-white">
+      <div className="container mx-auto flex h-full min-h-0 items-center px-4">
+        <div className="flex min-h-0 flex-1 items-center justify-between">
           <Link href="/" className="text-xl font-bold text-white hover:text-blue-100">
             湯姆的新聞網站測試
           </Link>

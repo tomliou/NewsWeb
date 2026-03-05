@@ -16,11 +16,12 @@ function getTodayDateString() {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 }
 
+/** Tab 與 Strapi 後台 category (1)* 對應，依分類名稱篩選 */
 const categories = [
-  { id: 'tech', name: '科技', source: 'yahoo 科技新聞' },
-  { id: 'finance', name: '財經', source: '東森新聞雲 財經新聞' },
-  { id: 'social', name: '社會', source: 'Google 社會新聞' },
-  { id: 'entertainment', name: '娛樂', source: '娛樂' },
+  { id: 'tech', name: '科技' },
+  { id: 'finance', name: '財經' },
+  { id: 'social', name: '社會' },
+  { id: 'entertainment', name: '娛樂' },
 ]
 
 interface HomeClientProps {
@@ -39,19 +40,27 @@ export default function HomeClient({
   return (
     <div className="space-y-8">
       <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
-        <div className="fixed left-0 right-0 top-16 z-40 bg-gray-100">
-          <div className="container mx-auto border-b px-4">
-            <Tab.List className="flex space-x-4">
+        {/* 高度用 inline style 鎖死，避免字體載入或 reflow 導致變高 */}
+        <div
+          className="fixed left-0 right-0 top-16 z-40 shrink-0 overflow-hidden bg-gray-100"
+          style={{ height: 48, minHeight: 48, maxHeight: 48 }}
+        >
+          <div
+            className="container mx-auto flex border-b px-4"
+            style={{ height: '100%', minHeight: 0 }}
+          >
+            <Tab.List className="flex h-full min-h-0 items-center space-x-4">
               {categories.map((cat) => (
                 <Tab
                   key={cat.id}
                   className={({ selected }) =>
-                    `h-11 py-2 px-4 text-sm font-medium leading-5 outline-none ring-0 focus:outline-none focus:ring-0 ${
+                    `flex shrink-0 items-center px-4 text-sm font-medium leading-none outline-none ring-0 focus:outline-none focus:ring-0 ${
                       selected
                         ? 'border-b-2 border-blue-500 text-blue-600'
                         : 'text-gray-600 hover:text-blue-600'
                     }`
                   }
+                  style={{ height: 40, minHeight: 40 }}
                 >
                   {cat.name}
                 </Tab>
@@ -71,7 +80,7 @@ export default function HomeClient({
           <Tab.Panels className="mt-4">
           {categories.map((cat) => {
             const filtered = initialArticles.filter(
-              (item) => item.source === cat.source
+              (item) => item.category === cat.name
             )
             return (
               <Tab.Panel
@@ -88,11 +97,7 @@ export default function HomeClient({
                       title={item.title}
                       description={item.description}
                       source={item.source}
-                      date={
-                        item.date
-                          ? new Date(item.date).toLocaleDateString('zh-TW')
-                          : ''
-                      }
+                      date={new Date().toLocaleDateString('zh-TW')}
                       href={item.href}
                       image={item.image}
                       showFooterText={false}
