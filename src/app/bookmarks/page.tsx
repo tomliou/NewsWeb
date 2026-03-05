@@ -34,7 +34,7 @@ export default function BookmarksPage() {
   }, []); // 空依賴陣列，只在組件掛載時執行一次
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 pt-8">
       <h1 className="text-4xl font-bold">我的收藏</h1>
       
       {bookmarks.length === 0 ? (
