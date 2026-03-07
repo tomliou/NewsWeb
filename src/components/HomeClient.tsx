@@ -68,7 +68,7 @@ export default function HomeClient({
         </div>
 
         {/* 預留固定高度，避免問候語被固定 Tab 遮住（padding 不塌陷） */}
-        <div className="pt-8">
+        <div className="pt-20">
           <h1 className="text-4xl">
             <span className="font-bold">{userName}</span>
             <span className="font-normal"> 早安！以下是 {dateStr} 的精選新聞</span>

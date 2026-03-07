@@ -110,12 +110,12 @@ export default function NewsCard({
           {toastMessage}
         </div>
       )}
-      <div className="relative">
+      <div className="relative h-full">
         <a
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="block p-6 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow transition-shadow"
+          className="flex flex-col h-full p-6 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow transition-shadow overflow-hidden"
         >
           <div className="relative mb-4">
             <img
@@ -128,10 +128,10 @@ export default function NewsCard({
             />
           </div>
           <h3 className="text-lg font-semibold mb-2 line-clamp-2 min-h-[3em] leading-snug">{title}</h3>
-          <p className="text-[0.9rem] font-normal text-gray-500 mb-4 line-clamp-3">
+          <p className="text-[0.9rem] font-normal text-gray-500 mb-4 line-clamp-3 flex-1">
             {description}
           </p>
-          <div className="flex justify-between items-center text-sm text-gray-500">
+          <div className="flex justify-between items-center text-sm text-gray-500 mt-auto pt-2 border-t border-gray-100">
             <span>{date} · {source}</span>
             <span className="flex items-center gap-2">
               <HeartIcon
